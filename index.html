@@ -1,0 +1,843 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<style>
+			.reveal pre {
+				box-shadow: none;
+			}
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>
+						<a href="https://github.com/bem/bem-xjst/tree/v7.6.4/docs/ru">bem-xjst v7.6.4</a>
+					</h1>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#block">block</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {string} name Имя блока
+ */
+block(name)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')();
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button'
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#mod">mod</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {string} name Имя модификатора блока
+ * @param {string} value Значение модификатора блока
+ */
+mod(name, value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	mod('theme', 'action')()
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	mods: {
+		theme: 'action'
+	}
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button button_theme_action"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#elem">elem</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {string} name Имя элемента
+ */
+elem(name)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	elem('icon')()
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	elem: 'icon'
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button__icon"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#elemmod">elemMod</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {string} name Имя модификатора элемента
+ * @param {string} value Значение модификатора элемента
+ */
+elemMod(name, value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	elem('icon')(
+		elemMod('type', 'arrow')()
+	)
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	elem: 'icon',
+	elemMods: {
+		type: 'arrow'
+	}
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button__icon_type_arrow"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#mix">mix</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|Array|Object|string} value Блок, который будет примиксован
+ */
+mix()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	mix()({
+		block: 'fancy'
+	})
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	mix: {
+		block: 'fancy'
+	}
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button fancy"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#tag">tag</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|string} value Тэг
+ */
+tag()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	tag()('button')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	tag: 'button'
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<button class="button"></button>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#attrs">attrs</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|Object} value Атрибуты
+ */
+attrs()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	attrs()({
+		type: 'submit'
+	})
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	attrs: {
+		type: 'submit'
+	}
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button" type="submit"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#content">content</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {*} value Контент
+ */
+content()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	content()('go')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	content: 'go'
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button">go</div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>prependContent</h2>
+					<pre>
+					<code data-trim data-noescape>
+/**
+ * @param {*} value Добавить контент в начало
+ */
+prependContent()(value)
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h3>bemhtml</h3>
+				<pre>
+					<code data-trim data-noescape>
+block('button')(
+	prependContent()('here we ')
+);
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h3>bemhtml</h3>
+				<pre>
+					<code data-trim data-noescape>
+content()(function() {
+	return [
+		'here we ',
+		applyNext()
+	];
+});
+					</code>
+				</pre>
+			</section>
+			<section>
+				<h3>html</h3>
+				<pre>
+					<code data-trim>
+<div class="button">here we go</div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>appendContent</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {*} value Добавить контент в конец
+ */
+appendContent()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	appendContent()(' back')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+content()(function() {
+	return [
+		applyNext(),
+		' back'
+	];
+});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button">go back</div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#js">js</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|boolean|Object} value JS атрибут
+ */
+js()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	js()({
+		keycode: 13
+	})
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	js: {
+		keycode: 13
+	}
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button i-bem" data-bem='{"button":{"keycode":13}}'></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#bem">bem</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|boolean} value Управление инициализацией БЭМ сущности
+ */
+bem()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	bem()(false)
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	bem: false
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#cls">cls</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|string|number} value Добавление класса
+ */
+cls()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	cls()('hello')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	cls: 'hello'
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button hello"></div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#wrap">wrap</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {*} value Обертка над блоком
+ */
+wrap()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	wrap()(function(){
+		return {
+			block: 'wrapper',
+			content: this.ctx
+		};
+	})
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="wrapper">
+	<div class="button"></div>
+</div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#def">def</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|Array|string|number} value Переопределение дефолтного шаблона
+ */
+def()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	def()('no button')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+no button
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#extend">extend</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function|Object} value Расширение контекста
+ */
+extend()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	extend()({
+		icon: true
+	})
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	icon: true
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#replace">replace</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {*} value Замена сущности
+ */
+replace()(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	replace()('no button')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+no button
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#match">match</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {function} Проверка произвольного условия. Результат будет приведен к boolean.
+ */
+match(function() { return … })
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	match(function() {
+		return this.ctx.icon;
+	})(
+		content()(function() {
+			return {
+				block: 'button',
+				elem: 'icon',
+				elemMods: {
+					type: 'arrow'
+				}
+			};
+		})
+	)
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemjson</h3>
+					<pre>
+						<code data-trim data-noescape>
+{
+	block: 'button',
+	icon: true
+}
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>html</h3>
+					<pre>
+						<code data-trim>
+<div class="button">
+	<div class="button__icon button__icon_type_arrow"></div>
+</div>
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/bem/bem-xjst/blob/v7.6.4/docs/ru/5-templates-syntax.md#Пользовательские-режимы">mode</a>
+					</h2>
+					<pre>
+						<code data-trim data-noescape>
+/**
+ * @param {string} name Имя пользовательского режима
+ * @param {*} value Значение
+ */
+mode(name)(value)
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h3>bemhtml</h3>
+					<pre>
+						<code data-trim data-noescape>
+block('button')(
+	mode('hello')('world')
+);
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>
+						<a href="https://github.com/yalovek/bemhtml-presentation">Презентация на GitHub</a>
+					</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
